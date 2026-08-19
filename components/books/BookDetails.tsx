@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Book } from '@/types';
 import { BookMeta } from './BookMeta';
 import { SectionLabel } from '@/components/common/SectionLabel';
-import { ArrowLeft, ShieldCheck, Truck, BookCheck, ShoppingBag } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Truck, BookCheck, ShoppingBag, ShoppingCart, Check } from 'lucide-react';
 import { useOrderModal } from '@/context/OrderContext';
+import { useCart } from '@/context/CartContext';
 
 interface BookDetailsProps {
   book: Book;
@@ -16,6 +17,22 @@ interface BookDetailsProps {
 
 export const BookDetails: React.FC<BookDetailsProps> = ({ book, className = '' }) => {
   const { openOrderModal } = useOrderModal();
+  const { addToCart, openCart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: book.id || book.slug,
+      title: book.title,
+      author: book.author,
+      cover: book.cover,
+      price: book.price,
+      category: book.category,
+      type: 'book',
+    });
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
 
   return (
     <div className={`space-y-12 ${className}`}>
@@ -78,15 +95,39 @@ export const BookDetails: React.FC<BookDetailsProps> = ({ book, className = '' }
             </span>
           </div>
 
-          {/* Primary Action (Order Modal Trigger) */}
+          {/* Primary Action (Order & Add to Cart Triggers) */}
           <div className="space-y-3 pt-2">
-            <button
-              onClick={() => openOrderModal({ ...book, type: 'book' })}
-              className="w-full bg-[#00A859] hover:bg-[#00924d] text-white font-semibold py-4 px-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 text-base sm:text-lg active:scale-[0.98]"
-            >
-              <ShoppingBag className="w-5 h-5 shrink-0" />
-              <span>Order Book</span>
-            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                onClick={handleAddToCart}
+                className={`py-4 px-6 rounded-xl font-semibold border flex items-center justify-center gap-2.5 text-base transition-all shadow-sm ${
+                  isAdded
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                    : 'bg-white text-[#111111] border-gray-300 hover:border-[#0098DA] hover:text-[#0098DA] hover:shadow'
+                }`}
+              >
+                {isAdded ? (
+                  <>
+                    <Check className="w-5 h-5 text-emerald-600" />
+                    <span>Added to Cart!</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="w-5 h-5 text-[#0098DA]" />
+                    <span>Add to Cart</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={() => openOrderModal({ ...book, type: 'book' })}
+                className="w-full bg-[#00A859] hover:bg-[#00924d] text-white font-semibold py-4 px-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2.5 text-base active:scale-[0.98]"
+              >
+                <ShoppingBag className="w-5 h-5 shrink-0" />
+                <span>Order Single Book</span>
+              </button>
+            </div>
+
             <p className="text-xs text-gray-500 text-center font-sans">
               Orders are fulfilled directly by Mazhathulli Publishing House with pan-India delivery.
             </p>

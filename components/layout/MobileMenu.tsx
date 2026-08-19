@@ -3,11 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { X } from 'lucide-react';
+import { X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MAIN_NAVIGATION } from '@/data/navigation';
 import { MazhathulliLogo } from '@/components/common/MazhathulliLogo';
 import { WhatsAppButton } from '@/components/common/WhatsAppButton';
+import { useCart } from '@/context/CartContext';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ interface MobileMenuProps {
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
+  const { totalCount, openCart } = useCart();
 
   return (
     <AnimatePresence>
@@ -66,12 +68,22 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
 
           {/* Bottom Actions */}
           <div className="mt-auto pt-6 border-t border-white/10 flex flex-col space-y-4">
-            {/* <WhatsAppButton
-              type="general"
-              size="lg"
-              fullWidth
-              label="Enquire via WhatsApp"
-            /> */}
+            <button
+              onClick={() => {
+                onClose();
+                openCart();
+              }}
+              className="w-full py-3.5 px-6 rounded-xl bg-[#0098DA] hover:bg-[#0082bd] text-white font-semibold flex items-center justify-between transition-colors shadow-lg"
+            >
+              <span className="flex items-center gap-2.5">
+                <ShoppingCart className="w-5 h-5" />
+                <span>View Shopping Cart</span>
+              </span>
+              <span className="bg-white text-[#0098DA] text-xs font-bold px-2.5 py-1 rounded-full">
+                {totalCount} {totalCount === 1 ? 'item' : 'items'}
+              </span>
+            </button>
+
             <p className="text-xs text-center text-gray-400 font-sans mt-2">
               © {new Date().getFullYear()} Mazhathulli Publishing & Cultural Foundation
             </p>

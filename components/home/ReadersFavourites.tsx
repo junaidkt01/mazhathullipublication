@@ -1,16 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, ShoppingCart, Check } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { BOOKS_DATA } from '@/data/books';
 import { useOrderModal } from '@/context/OrderContext';
+import { useCart } from '@/context/CartContext';
 
 export const ReadersFavourites: React.FC = () => {
   const { openOrderModal } = useOrderModal();
+  const { addToCart } = useCart();
+  const [addedItems, setAddedItems] = useState<Record<string, boolean>>({});
+
+  const handleAddToCart = (book: (typeof BOOKS_DATA)[0]) => {
+    addToCart({
+      id: book.id || book.slug,
+      title: book.title,
+      author: book.author,
+      cover: book.cover,
+      price: book.price,
+      category: book.category,
+      type: 'book',
+    });
+    setAddedItems((prev) => ({ ...prev, [book.id]: true }));
+    setTimeout(() => {
+      setAddedItems((prev) => ({ ...prev, [book.id]: false }));
+    }, 1800);
+  };
+
   const spotlightBook = BOOKS_DATA[0];
   const secondaryBooks = BOOKS_DATA.slice(1, 4);
 
@@ -56,15 +76,39 @@ export const ReadersFavourites: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div className="pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
                   <span className="font-serif text-2xl font-bold text-[#111111]">₹{spotlightBook.price}</span>
-                  <button
-                    onClick={() => openOrderModal({ ...spotlightBook, type: 'book' })}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00924d] rounded-xl shadow-md transition-all active:scale-[0.98]"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Order Book</span>
-                  </button>
+                  
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleAddToCart(spotlightBook)}
+                      className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border transition-all active:scale-[0.98] ${
+                        addedItems[spotlightBook.id]
+                          ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                          : 'bg-white text-gray-700 border-gray-300 hover:border-[#0098DA] hover:text-[#0098DA]'
+                      }`}
+                    >
+                      {addedItems[spotlightBook.id] ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Added</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                          <span>Add Cart</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      onClick={() => openOrderModal({ ...spotlightBook, type: 'book' })}
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-[#00A859] hover:bg-[#00924d] rounded-xl shadow-md transition-all active:scale-[0.98]"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>Order</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,15 +139,33 @@ export const ReadersFavourites: React.FC = () => {
                     </h4>
                   </Link>
                   <span className="text-xs text-gray-500 block font-sans">By {book.author}</span>
-                  <div className="pt-2 flex items-center justify-between">
+                  <div className="pt-2 flex items-center justify-between gap-2">
                     <span className="font-serif font-bold text-sm text-[#111111]">₹{book.price}</span>
-                    <button
-                      onClick={() => openOrderModal({ ...book, type: 'book' })}
-                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-[#00A859] hover:bg-[#00A859]/10 rounded-lg transition-colors"
-                    >
-                      <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Order</span>
-                    </button>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => handleAddToCart(book)}
+                        className={`inline-flex items-center justify-center p-2 text-xs font-semibold rounded-lg border transition-all ${
+                          addedItems[book.id]
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                            : 'bg-white text-gray-700 border-gray-300 hover:border-[#0098DA] hover:text-[#0098DA]'
+                        }`}
+                        title="Add to Cart"
+                      >
+                        {addedItems[book.id] ? (
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        ) : (
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                        )}
+                      </button>
+
+                      <button
+                        onClick={() => openOrderModal({ ...book, type: 'book' })}
+                        className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#00A859] hover:bg-[#00A859]/10 rounded-lg transition-colors"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>Order</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

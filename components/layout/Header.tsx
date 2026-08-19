@@ -3,16 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, ShoppingCart } from 'lucide-react';
 import { MAIN_NAVIGATION } from '@/data/navigation';
 import { MazhathulliLogo } from '@/components/common/MazhathulliLogo';
 import { WhatsAppButton } from '@/components/common/WhatsAppButton';
 import { MobileMenu } from './MobileMenu';
+import { useCart } from '@/context/CartContext';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { totalCount, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,24 +74,32 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Action */}
-          {/* <div className="hidden sm:flex items-center space-x-3">
-            <WhatsAppButton
-              type="general"
-              variant="solid"
-              size="sm"
-              label="WhatsApp Enquiry"
-            />
-          </div> */}
+          {/* Right Action — Cart & Mobile Menu */}
+          <div className="flex items-center space-x-3">
+            <button
+              onClick={openCart}
+              className="relative p-2.5 rounded-xl bg-white border border-gray-200 shadow-sm hover:border-[#0098DA] hover:text-[#0098DA] text-gray-800 transition-all active:scale-95 flex items-center gap-2"
+              aria-label="Open Shopping Cart"
+              title="View Cart"
+            >
+              <ShoppingCart className="w-5 h-5 text-[#0098DA]" />
+              <span className="hidden sm:inline text-xs font-semibold">Cart</span>
+              {totalCount > 0 && (
+                <span className="flex items-center justify-center min-w-[20px] h-5 px-1 text-[11px] font-bold text-white bg-[#00A859] rounded-full shadow-sm">
+                  {totalCount}
+                </span>
+              )}
+            </button>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
-            aria-label="Open mobile menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden p-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
+              aria-label="Open mobile menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
         </div>
       </header>
 

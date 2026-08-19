@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { OrderProvider } from '@/components/providers/OrderProvider';
+import { CartProvider } from '@/components/providers/CartProvider';
 
 export default function RootLayout({
   children,
@@ -74,13 +74,13 @@ export default function RootLayout({
       className={`${dmSans.variable} ${manrope.variable} ${inter.variable}`}
     >
       <body className="font-sans bg-[#FAF9F6] text-[#1A1A1A] antialiased selection:bg-[#0098DA] selection:text-white flex flex-col min-h-screen">
-        <OrderProvider>
+        <CartProvider>
           <SmoothScroll>
             <Header />
             <div className="flex-grow">{children}</div>
             <Footer />
           </SmoothScroll>
-        </OrderProvider>
+        </CartProvider>
       </body>
     </html>
   );
