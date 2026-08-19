@@ -1,0 +1,117 @@
+import { DropletProduct } from '@/types';
+
+export const DROPLET_PRODUCTS: DropletProduct[] = [
+  {
+    id: 'dp1',
+    slug: 'handcrafted-teakwood-book-rest',
+    title: 'Minimalist Teakwood Reading Desk & Book Rest',
+    category: 'Gifts',
+    price: 1250,
+    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: 'Hand-carved Kerala teakwood holder for book lovers and writers.',
+    description: 'Crafted by master artisans in Wayanad using sustainably sourced Kerala teakwood. Features adjustable angle slots and brass accent pins. Perfect for keeping open books at an ergonomic reading angle.',
+    isFeatured: true,
+    specs: [
+      { label: 'Material', value: 'Solid Kerala Teakwood & Natural Oil Finish' },
+      { label: 'Dimensions', value: '28 cm x 20 cm x 3 cm' },
+      { label: 'Weight', value: '450 g' },
+      { label: 'Craft', value: '100% Handcrafted Artisan Woodwork' },
+    ],
+  },
+  {
+    id: 'dp2',
+    slug: 'malayalam-literary-calligraphy-frame',
+    title: '“മഴ” (Rain) Malayalam Calligraphy Art Frame',
+    category: 'Frames',
+    price: 1890,
+    image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: 'Archival ink print on handmade cotton paper in matte oak frame.',
+    description: 'Original typography artwork by Kavitha Balakrishnan rendering the iconic Malayalam word "മഴ" (Mazha) in fluid brush calligraphy. Printed on 300 GSM acid-free cotton rag paper.',
+    isFeatured: true,
+    specs: [
+      { label: 'Paper', value: '300 GSM Handmade Acid-Free Cotton Paper' },
+      { label: 'Frame', value: 'Natural Matte Oak Wood with Shatterproof Acrylic' },
+      { label: 'Dimensions', value: '12" x 16" (A3 size)' },
+    ],
+  },
+  {
+    id: 'dp3',
+    slug: 'curated-indie-poetry-collection',
+    title: 'Curated Indie Press Anthology: "Songs of the Western Ghats"',
+    category: 'Books',
+    price: 650,
+    image: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: 'Hardcover edition from Greenleaf Press curated exclusively by Droplet.co.',
+    description: 'A collector\'s edition bringing together 24 independent voices celebrating ecology, indigenous folklore, and forest solitude across South India.',
+    isFeatured: true,
+    specs: [
+      { label: 'Format', value: 'Hardcover with Cloth Bookmark' },
+      { label: 'Publisher', value: 'Greenleaf Indie Press (Curated for Droplet)' },
+      { label: 'Pages', value: '210 Pages' },
+    ],
+  },
+  {
+    id: 'dp4',
+    slug: 'vintage-brass-monsoon-bookmark',
+    title: 'Hand-Etched Brass Raindrop Bookmark',
+    category: 'Gifts',
+    price: 450,
+    image: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: 'Solid brass bookmark featuring etched Mazhathulli raindrop icon and silk tassel.',
+    description: 'Precision-etched solid brass bookmark with an antiqued patina finish and deep green silk thread tassel. Will not rust or tear delicate book pages.',
+    isFeatured: false,
+    specs: [
+      { label: 'Material', value: 'Pure Brass with Silk Tassel' },
+      { label: 'Dimensions', value: '14 cm x 3 cm' },
+    ],
+  },
+  {
+    id: 'dp5',
+    slug: 'botanical-monsoon-sketchbook-journal',
+    title: 'Recycled Paper Hardbound Writer\'s Journal',
+    category: 'Gifts',
+    price: 580,
+    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: '192 blank cream pages bound in hand-printed botanical linen.',
+    description: 'Designed specifically for writers and sketch artists. Lays 180° flat with ink-friendly 120 GSM unlined pages that handle fountain pens effortlessly.',
+    isFeatured: false,
+    specs: [
+      { label: 'Pages', value: '192 Unlined Cream Pages (120 GSM)' },
+      { label: 'Binding', value: 'Smyth-Sewn Handbound Linen' },
+    ],
+  },
+  {
+    id: 'dp6',
+    slug: 'literary-quote-framed-art',
+    title: '“Words are Water” Framed Typography Art',
+    category: 'Frames',
+    price: 1450,
+    image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80',
+    ],
+    shortInfo: 'Elegant minimalist quote artwork for study rooms and home libraries.',
+    description: 'A timeless quote on reading and imagination rendered in classic serif typography with subtle gold foil accents on deep charcoal paper.',
+    isFeatured: false,
+    specs: [
+      { label: 'Frame', value: 'Dark Walnut Solid Wood' },
+      { label: 'Size', value: '10" x 12"' },
+    ],
+  },
+];
