@@ -7,6 +7,9 @@ export interface Book {
   cover: string;
   price?: number;
   originalPrice?: number;
+  paperbackPrice?: number;
+  ebookPrice?: number;
+  ebookUrl?: string;
   language?: string;
   pages?: number;
   description?: string;

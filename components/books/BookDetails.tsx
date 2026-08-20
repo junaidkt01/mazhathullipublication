@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Book } from '@/types';
 import { BookMeta } from './BookMeta';
 import { SectionLabel } from '@/components/common/SectionLabel';
-import { ArrowLeft, ShieldCheck, Truck, BookCheck, ShoppingBag, ShoppingCart, Check } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Truck, BookCheck, ShoppingBag, ShoppingCart, Check, FileText, BookOpen, ExternalLink } from 'lucide-react';
 import { useOrderModal } from '@/context/OrderContext';
 import { useCart } from '@/context/CartContext';
 
@@ -93,6 +93,40 @@ export const BookDetails: React.FC<BookDetailsProps> = ({ book, className = '' }
             <span className="text-xs font-semibold uppercase tracking-wider text-[#00A859] bg-[#00A859]/10 px-2.5 py-1 rounded-full">
               Direct Publishing Price
             </span>
+          </div>
+
+          {/* Format Options Small Tags */}
+          <div className="space-y-2 pt-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-gray-500 block">
+              Format:
+            </span>
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Paperback Small Tag */}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 border border-gray-300 text-xs font-semibold text-gray-800 shadow-sm">
+                <BookOpen className="w-3.5 h-3.5 text-[#0098DA]" />
+                <span>Paperback — ₹{book.paperbackPrice || book.price}</span>
+              </div>
+
+              {/* E-Book / PDF Small Tag Button */}
+              {book.ebookUrl ? (
+                <a
+                  href={book.ebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0098DA]/10 hover:bg-[#0098DA]/20 border border-[#0098DA]/40 text-xs font-semibold text-[#0098DA] transition-all shadow-sm group cursor-pointer"
+                  title="Click to view / purchase E-Book"
+                >
+                  <FileText className="w-3.5 h-3.5 text-[#0098DA]" />
+                  <span>E-Book — {book.ebookPrice ? `₹${book.ebookPrice}` : 'Available'}</span>
+                  <ExternalLink className="w-3 h-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                </a>
+              ) : (
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-200 text-xs font-medium text-gray-400">
+                  <FileText className="w-3.5 h-3.5 text-gray-400" />
+                  <span>E-Book — Coming Soon</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Primary Action (Order & Add to Cart Triggers) */}

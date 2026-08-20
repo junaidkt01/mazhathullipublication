@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageContainer } from '@/components/layout/PageContainer';
 import { HeroSection } from '@/components/home/HeroSection';
 import { AboutPreview } from '@/components/home/AboutPreview';
