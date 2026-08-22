@@ -15,7 +15,7 @@ export const JournalGrid: React.FC<JournalGridProps> = ({ articles, className = 
   if (!articles || articles.length === 0) {
     return (
       <EmptyState
-        title="No journal articles found"
+        title="No magazine articles found"
         description="Try selecting a different literary category."
         icon="inbox"
       />

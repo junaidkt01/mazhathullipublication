@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Manrope, Inter } from 'next/font/google';
+import { DM_Sans, Manrope, Inter, Noto_Serif_Malayalam } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -23,6 +23,13 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const notoSerifMalayalam = Noto_Serif_Malayalam({
+  subsets: ['malayalam'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-malayalam',
   display: 'swap',
 });
 
@@ -70,8 +77,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${dmSans.variable} ${manrope.variable} ${inter.variable}`}
+      lang="ml"
+      className={`${dmSans.variable} ${manrope.variable} ${inter.variable} ${notoSerifMalayalam.variable}`}
     >
       <body className="font-sans bg-[#FAF9F6] text-[#1A1A1A] antialiased selection:bg-[#0098DA] selection:text-white flex flex-col min-h-screen">
         <CartProvider>

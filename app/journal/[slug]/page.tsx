@@ -1,68 +1,10 @@
-import React from 'react';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { PageContainer } from '@/components/layout/PageContainer';
-import { Container } from '@/components/common/Container';
-import { ArticleContent } from '@/components/journal/ArticleContent';
-import { JournalGrid } from '@/components/journal/JournalGrid';
-import { SectionHeading } from '@/components/common/SectionHeading';
-import { JOURNAL_ARTICLES } from '@/data/journal';
+import { redirect } from 'next/navigation';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return JOURNAL_ARTICLES.map((article) => ({
-    slug: article.slug,
-  }));
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export default async function JournalSlugRedirect({ params }: PageProps) {
   const { slug } = await params;
-  const article = JOURNAL_ARTICLES.find((a) => a.slug === slug);
-
-  if (!article) {
-    return { title: 'Article Not Found' };
-  }
-
-  return {
-    title: article.title,
-    description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      images: [{ url: article.coverImage }],
-    },
-  };
-}
-
-export default async function JournalArticlePage({ params }: PageProps) {
-  const { slug } = await params;
-  const article = JOURNAL_ARTICLES.find((a) => a.slug === slug);
-
-  if (!article) {
-    notFound();
-  }
-
-  const related = JOURNAL_ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
-
-  return (
-    <PageContainer>
-      <Container>
-        <ArticleContent article={article} />
-
-        {/* Related Stories */}
-        {related.length > 0 && (
-          <div className="pt-16 mt-16 border-t border-gray-200">
-            <SectionHeading
-              eyebrow="MORE FROM THE JOURNAL"
-              title="Related Essays & Stories"
-            />
-            <JournalGrid articles={related} />
-          </div>
-        )}
-      </Container>
-    </PageContainer>
-  );
+  redirect(`/web-magazine/${slug}`);
 }

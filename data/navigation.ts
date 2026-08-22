@@ -2,6 +2,7 @@ export interface NavLink {
   label: string;
   href: string;
   badge?: string;
+  sublinks?: { label: string; href: string }[];
 }
 
 export const MAIN_NAVIGATION: NavLink[] = [
@@ -10,7 +11,18 @@ export const MAIN_NAVIGATION: NavLink[] = [
   { label: 'Books', href: '/books' },
   { label: 'Courses', href: '/courses' },
   { label: 'Mazhathulli Awards', href: '/awards' },
-  { label: 'Journal', href: '/journal' },
+  {
+    label: 'Web Magazine',
+    href: '/web-magazine',
+    sublinks: [
+      { label: 'Book review', href: '/web-magazine?category=Book%20review' },
+      { label: 'Stories', href: '/web-magazine?category=Stories' },
+      { label: 'Poem', href: '/web-magazine?category=Poem' },
+      { label: 'Memoir', href: '/web-magazine?category=Memoir' },
+      { label: 'Interviews', href: '/web-magazine?category=Interviews' },
+      { label: 'Cinema', href: '/web-magazine?category=Cinema' },
+    ],
+  },
   { label: 'Droplet.co', href: '/droplet', badge: 'Curated' },
 ];
 
@@ -20,7 +32,7 @@ export const FOOTER_NAVIGATION = {
     { label: 'Publications & Books', href: '/books' },
     { label: 'Academy & Courses', href: '/courses' },
     { label: 'Mazhathulli Awards', href: '/awards' },
-    { label: 'Literary Journal', href: '/journal' },
+    { label: 'Web Magazine', href: '/web-magazine' },
   ],
   droplet: [
     { label: 'Curated Books', href: '/droplet?category=Books' },

@@ -26,6 +26,7 @@
   --font-serif: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   --font-sans: var(--font-manrope), system-ui, -apple-system, sans-serif;
   --font-label: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-malayalam: var(--font-malayalam), 'Noto Serif Malayalam', 'Gayathri', 'Manjari', 'Kartika', serif;
 }
 
 html {
@@ -42,6 +43,10 @@ body {
 
 .font-label {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+.font-malayalam {
+  font-family: var(--font-malayalam), 'Noto Serif Malayalam', 'Gayathri', 'Manjari', 'Kartika', 'Noto Sans Malayalam', serif;
 }
 
 /* Selection highlight */

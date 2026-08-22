@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { X, ShoppingCart } from 'lucide-react';
+import { X, ShoppingCart, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MAIN_NAVIGATION } from '@/data/navigation';
 import { MazhathulliLogo } from '@/components/common/MazhathulliLogo';
-import { WhatsAppButton } from '@/components/common/WhatsAppButton';
 import { useCart } from '@/context/CartContext';
 
 interface MobileMenuProps {
@@ -18,6 +17,11 @@ interface MobileMenuProps {
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
   const { totalCount, openCart } = useCart();
+  const [expandedItem, setExpandedItem] = useState<string | null>('Web Magazine');
+
+  const toggleExpand = (label: string) => {
+    setExpandedItem((prev) => (prev === label ? null : label));
+  };
 
   return (
     <AnimatePresence>
@@ -42,26 +46,62 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-col py-8 space-y-6">
+          <nav className="flex flex-col py-8 space-y-4">
             {MAIN_NAVIGATION.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.sublinks && pathname.startsWith(item.href));
+              const hasSublinks = Boolean(item.sublinks && item.sublinks.length > 0);
+              const isExpanded = expandedItem === item.label;
 
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={onClose}
-                  className={`group flex items-center justify-between text-2xl font-serif font-bold tracking-wide transition-colors ${
-                    isActive ? 'text-[#0098DA]' : 'text-white/90 hover:text-white'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="text-xs font-sans uppercase font-semibold px-2.5 py-0.5 rounded-full bg-[#00A859]/20 text-[#00A859] border border-[#00A859]/40">
-                      {item.badge}
-                    </span>
+                <div key={item.href} className="flex flex-col border-b border-white/5 pb-3">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      className={`text-2xl font-serif font-bold tracking-wide transition-colors ${
+                        isActive ? 'text-[#0098DA]' : 'text-white/90 hover:text-white'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+
+                    {hasSublinks && (
+                      <button
+                        onClick={() => toggleExpand(item.label)}
+                        className="p-2 text-gray-400 hover:text-white transition-colors"
+                        aria-label={`Toggle ${item.label} submenu`}
+                      >
+                        <ChevronDown
+                          className={`w-6 h-6 transition-transform duration-200 ${
+                            isExpanded ? 'rotate-180 text-[#0098DA]' : ''
+                          }`}
+                        />
+                      </button>
+                    )}
+
+                    {item.badge && !hasSublinks && (
+                      <span className="text-xs font-sans uppercase font-semibold px-2.5 py-0.5 rounded-full bg-[#00A859]/20 text-[#00A859] border border-[#00A859]/40">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Submenu links */}
+                  {hasSublinks && isExpanded && (
+                    <div className="mt-3 pl-4 border-l-2 border-[#0098DA]/40 space-y-2.5 py-1">
+                      {item.sublinks!.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          onClick={onClose}
+                          className="block text-base font-sans text-gray-300 hover:text-[#0098DA] transition-colors"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                </Link>
+                </div>
               );
             })}
           </nav>

@@ -2,10 +2,35 @@ import { JournalArticle } from '@/types';
 
 export const JOURNAL_ARTICLES: JournalArticle[] = [
   {
+    id: 'j-poem-1',
+    slug: 'aduppumpallayile-karichatti',
+    title: 'അടുപ്പുംപള്ളയിലെ കരിചട്ടി (Aduppumpallayile Karichatti)',
+    category: 'Poem',
+    coverImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80',
+    author: {
+      name: 'ഷംല. എസ് (Shamla S.)',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      bio: 'ഗവൺമെൻ്റ് വിക്ടോറിയ കോളേജ് പാലക്കാട്, രണ്ടാം വർഷ എംഎ ഇക്കണോമിക്സ് വിദ്യാർത്ഥിനി. പാലക്കാട് ജില്ലയിലെ കുഴൽമന്ദം സ്വദേശിയാണ്. പിതാവ് ഷാജഹാൻ മാതാവ് സൈബുനീസ.',
+    },
+    date: 'August 21, 2026',
+    readTime: '3 min read',
+    isFeatured: true,
+    excerpt: 'ഒട്ടിപ്പിടിച്ച ചോറ്റുവറ്റുകൾ കഴുകുന്നതിനിടയിൽ ഉണങ്ങിയ വറ്റുതട്ടി വിരലുകീറി, ചോര പൊടിഞ്ഞു... നെറ്റിയിൽ ഒട്ടിച്ച സിന്ദൂര കറയുടെ അതേ ചുവപ്പ്!',
+    content: [
+      `ഒട്ടിപ്പിടിച്ച ചോറ്റുവറ്റുകൾ കഴുകുന്നതിനിടയിൽ \nഉണങ്ങിയ വറ്റുതട്ടി വിരലുകീറി, \nചോര പൊടിഞ്ഞു ...\nനെറ്റിയിൽ ഒട്ടിച്ച \nസിന്ദൂര കറയുടെ അതേ ചുവപ്പ്!`,
+      `കീറിയ വിരലിൽ മഞ്ഞപ്പൊടി അടിഞ്ഞു\nപിന്നെ മുളകുപൊടി, ഉപ്പ്,\nമൺചട്ടിക്കകത്തെ മീൻ പുളിയിൽ കുമിളകൾ പൊങ്ങി തീൻമേശയ്ക്ക് ചുറ്റും കൈകളും കാലുകളും നിറഞ്ഞു......`,
+      `   " ചോറ് ആയില്ലേ"...?\nമീശ ചുരുളുകൾക്കിടയിൽ നിന്നും \nവന്ന മുരൾച്ചയിൽ \nആ സ്ത്രീ വിറച്ചു!`,
+      `ആവി പറക്കുന്ന മീൻ ജഡത്തിൽ \nവിരലുകൾ അമർന്നു \nഎരുവും പുളിയും കലർന്ന ജഡകഷണങ്ങൾ തൊണ്ട കുഴിക്കകത്ത് വീണു\nകസേരകൾ പിന്നിലേക്ക് വലിഞ്ഞു, തീൻമേശയ്ക്ക് ചുറ്റും മീൻചൂര് പടർന്നു`,
+      `വാരിയെല്ലുകൾ നിറഞ്ഞ എച്ചിൽ പാത്രങ്ങൾ ഓരോന്നും അവർ പെറുക്കി\nകഴുത്തിലിട്ട താലിക്കുരുക്ക് \nവിയർപ്പുതട്ടി ഇറുകി!\nഒറ്റി വീണ വിയർപ്പ് തുള്ളികളിൽ\n കുങ്കുമകറ പരന്നു`,
+      `മീശ  ചുരുളുകൾക്കിടയിൽ നിന്ന് \nവീണ്ടും മുരൾച്ച !\nഅതിൽ അമ്മയുണ്ടായിരുന്നു, ഭാര്യയുണ്ടായിരുന്നു \n       "അച്ഛന് കുറച്ച് വെള്ളം"...`,
+      `അടുപ്പ് കത്തിച്ച് വെള്ളം വച്ചു.... അടുക്കളയൊട്ടാകെ പുക  പരുന്നു   ...\nപുക തട്ടി കണ്ണുകൾ നിറഞ്ഞു\nഅന്നേരം അടുപ്പുംപള്ളയിലെ കരിചട്ടി കിനിഞ്ഞു, അതിൽ \nകണ്ണുനീരിന്റെ ഉപ്പുപാട കലർന്നിരുന്നു...`,
+    ],
+  },
+  {
     id: 'j1',
     slug: 'the-art-of-monsoon-prose',
     title: 'The Art of Monsoon Prose: How Weather Shapes Vernacular Storytelling',
-    category: 'Writing',
+    category: 'Stories',
     coverImage: 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?auto=format&fit=crop&w=1200&q=80',
     author: {
       name: 'Anoop Keshavan',
@@ -14,7 +39,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     },
     date: 'February 12, 2026',
     readTime: '6 min read',
-    isFeatured: true,
+    isFeatured: false,
     excerpt: 'Monsoon in Kerala is not merely a seasonal transition; it is a psychological landscape that dictates pace, memory, and interiority in regional literature.',
     content: [
       'In Malayalam fiction, rain has rarely served as passive scenery. It enters the room like an uninvited protagonist — rattling wooden shutters, swelling canal banks, and forcing characters into intimate, unavoidable quarters.',
@@ -27,7 +52,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     id: 'j2',
     slug: 'why-independent-publishing-matters',
     title: 'Why Independent Publishing Houses Are the True Custodians of Regional Culture',
-    category: 'Books',
+    category: 'Book review',
     coverImage: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80',
     author: {
       name: 'Meera Nambiar',
@@ -48,7 +73,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     id: 'j3',
     slug: 'in-conversation-with-v-p-ramachandran',
     title: 'In Conversation with V. P. Ramachandran: Fifty Years of Reading Malayalam',
-    category: 'Authors',
+    category: 'Interviews',
     coverImage: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80',
     author: {
       name: 'Siddharth Varma',
@@ -67,8 +92,8 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
   {
     id: 'j4',
     slug: 'crafting-first-sentence',
-    title: 'Crafting the First Sentence: How Great Stories Hook Readers Instantly',
-    category: 'Writing',
+    title: 'Memoirs of Rain & Ink: Reflecting on Malayalam\'s Golden Periodicals',
+    category: 'Memoir',
     coverImage: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
     author: {
       name: 'Anoop Keshavan',
@@ -78,30 +103,30 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     date: 'November 05, 2025',
     readTime: '5 min read',
     isFeatured: false,
-    excerpt: 'Deconstructing memorable opening lines from world classics and contemporary Malayalam fiction.',
+    excerpt: 'Personal reflections on growing up reading literary weeklies under rainy roof tiles in rural Valluvanad.',
     content: [
-      'The first sentence of a novel carries immense weight. It establishes voice, rhythm, time, and emotional climate before the second line even arrives.',
-      'We examine five classic opening lines and analyze how subtle shifts in word order transform an ordinary statement into an irresistible invitation to turn the page.',
+      'The scent of fresh newsprint delivered by bicycle at dawn remains etched in memory. In small Malabar towns, weekly literary magazines were not mere reading material — they were cultural celebrations.',
+      'We examine how personal memoirs and village reading rooms nurtured generations of storytellers across Kerala.',
     ],
   },
   {
     id: 'j5',
-    slug: 'announcing-mazhathulli-awards-2026',
-    title: 'Announcing the Nominations for Mazhathulli Awards 2026',
-    category: 'News',
-    coverImage: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
+    slug: 'cinema-and-malayalam-literature',
+    title: 'Celluloid & Stanzas: How Malayalam Cinema Adapts Classic Literature',
+    category: 'Cinema',
+    coverImage: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80',
     author: {
       name: 'Mazhathulli Editorial Team',
       avatar: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=200&q=80',
       bio: 'Official news from Mazhathulli Literary Foundation.',
     },
     date: 'October 14, 2025',
-    readTime: '4 min read',
+    readTime: '7 min read',
     isFeatured: false,
-    excerpt: 'Discover the shortlist for the 2026 honors across Fiction, Poetry, Children\'s Literature, and Translation.',
+    excerpt: 'From Basheer to M.T. Vasudevan Nair, exploring the symbiotic relationship between Malayalam screenwriting and modern literary craft.',
     content: [
-      'The jury panel has officially unveiled the shortlisted titles for the 4th Mazhathulli Awards. Over 180 entries published in 2025 were evaluated over six months.',
-      'The final award ceremony will be hosted at Tagore Hall, Kozhikode, featuring book readings, live musical tributes, and keynote addresses by leading intellectuals.',
+      'Malayalam cinema has long maintained an unbroken conversation with literature. Screenwriters were often novelists first, resulting in cinema that prioritized dialogue rhythm, character interiority, and landscape as emotion.',
+      'In this article, we analyze five masterwork screen adaptations and how directors visualised literary metaphors on screen.',
     ],
   },
 ];

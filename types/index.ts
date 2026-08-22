@@ -88,7 +88,7 @@ export interface JournalArticle {
   id: string;
   slug: string;
   title: string;
-  category: 'Writing' | 'Books' | 'Authors' | 'Courses' | 'News' | 'Literary Stories';
+  category: 'Book review' | 'Stories' | 'Poem' | 'Memoir' | 'Interviews' | 'Cinema' | 'Writing' | 'Books' | 'Authors' | 'Courses' | 'News' | 'Literary Stories';
   coverImage: string;
   author: {
     name: string;

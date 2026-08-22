@@ -1,20 +1,31 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, ShoppingCart } from 'lucide-react';
+import { Menu, ShoppingCart, ChevronDown, BookOpen, PenTool, Feather, HeartHandshake, Mic, Film } from 'lucide-react';
 import { MAIN_NAVIGATION } from '@/data/navigation';
 import { MazhathulliLogo } from '@/components/common/MazhathulliLogo';
 import { WhatsAppButton } from '@/components/common/WhatsAppButton';
 import { MobileMenu } from './MobileMenu';
 import { useCart } from '@/context/CartContext';
 
+const SUBLINK_ICONS: Record<string, React.ReactNode> = {
+  'Book review': <BookOpen className="w-4 h-4 text-[#0098DA]" />,
+  'Stories': <PenTool className="w-4 h-4 text-[#00A859]" />,
+  'Poem': <Feather className="w-4 h-4 text-purple-600" />,
+  'Memoir': <HeartHandshake className="w-4 h-4 text-amber-600" />,
+  'Interviews': <Mic className="w-4 h-4 text-rose-600" />,
+  'Cinema': <Film className="w-4 h-4 text-sky-600" />,
+};
+
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const { totalCount, openCart } = useCart();
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +39,17 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleMouseEnter = (label: string) => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+  };
 
   return (
     <>
@@ -45,31 +67,73 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {MAIN_NAVIGATION.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.sublinks && pathname.startsWith(item.href));
+              const hasSublinks = Boolean(item.sublinks && item.sublinks.length > 0);
+              const isOpen = openDropdown === item.label;
 
               return (
-                <Link
+                <div
                   key={item.href}
-                  href={item.href}
-                  className={`relative px-3.5 py-2 text-sm font-medium transition-colors group ${
-                    isActive ? 'text-[#0098DA]' : 'text-gray-800 hover:text-[#0098DA]'
-                  }`}
+                  className="relative"
+                  onMouseEnter={() => hasSublinks && handleMouseEnter(item.label)}
+                  onMouseLeave={() => hasSublinks && handleMouseLeave()}
                 >
-                  <span className="flex items-center gap-1.5">
-                    {item.label}
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpenDropdown(null)}
+                    className={`relative px-3.5 py-2 text-sm font-medium transition-colors group flex items-center gap-1.5 ${
+                      isActive ? 'text-[#0098DA]' : 'text-gray-800 hover:text-[#0098DA]'
+                    }`}
+                  >
+                    <span>{item.label}</span>
                     {item.badge && (
                       <span className="text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded bg-[#00A859]/10 text-[#00A859] border border-[#00A859]/30">
                         {item.badge}
                       </span>
                     )}
-                  </span>
-                  {/* Underline motif */}
-                  <span
-                    className={`absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-gradient-to-r from-[#0098DA] to-[#00A859] transition-transform duration-300 transform origin-left ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}
-                  />
-                </Link>
+                    {hasSublinks && (
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          isOpen ? 'rotate-180 text-[#0098DA]' : 'text-gray-400 group-hover:text-[#0098DA]'
+                        }`}
+                      />
+                    )}
+                    {/* Underline motif */}
+                    <span
+                      className={`absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-gradient-to-r from-[#0098DA] to-[#00A859] transition-transform duration-300 transform origin-left ${
+                        isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      }`}
+                    />
+                  </Link>
+
+                  {/* Dropdown Menu */}
+                  {hasSublinks && isOpen && (
+                    <div
+                      className="absolute top-full left-0 mt-1 w-60 bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-200/80 p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+                      onMouseEnter={() => handleMouseEnter(item.label)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <div className="px-3 py-1.5 mb-1 border-b border-gray-100 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                        Magazine Categories
+                      </div>
+                      <div className="grid grid-cols-1 gap-0.5">
+                        {item.sublinks!.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={() => setOpenDropdown(null)}
+                            className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-700 hover:text-[#0098DA] hover:bg-sky-50/80 transition-all group"
+                          >
+                            <span className="p-1.5 rounded-lg bg-gray-100 group-hover:bg-white shadow-xs transition-colors">
+                              {SUBLINK_ICONS[sub.label] || <PenTool className="w-3.5 h-3.5 text-[#0098DA]" />}
+                            </span>
+                            <span>{sub.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
@@ -103,7 +167,7 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Full-screen Mobile Navigation Drawer */}
+      {/* Mobile Drawer */}
       <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </>
   );

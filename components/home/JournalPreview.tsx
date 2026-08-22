@@ -13,14 +13,14 @@ export const JournalPreview: React.FC = () => {
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
           <SectionHeading
-            eyebrow="MAZHATHULLI JOURNAL"
-            title="From the Journal"
-            description="Essays on writing craft, literary culture, author conversations, and regional heritage."
+            eyebrow="MAZHATHULLI WEB MAGAZINE"
+            title="From the Web Magazine"
+            description="Essays, stories, Malayalam poetry, book reviews, author memoirs, interviews, and cinema appreciation."
             className="mb-0"
           />
           <div className="mt-4 md:mt-0">
-            <ArrowButton href="/journal" variant="blue">
-              Read Literary Journal →
+            <ArrowButton href="/web-magazine" variant="blue">
+              Explore Web Magazine →
             </ArrowButton>
           </div>
         </div>
