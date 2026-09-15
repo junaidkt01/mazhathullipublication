@@ -3,7 +3,7 @@ export interface Book {
   slug: string;
   title: string;
   author: string;
-  category: 'Fiction' | 'Poetry' | 'Novel' | 'Children\'s' | 'Essays' | 'Others';
+  category: 'Fiction' | 'Poetry' | 'Novel' | 'Children\'s' | 'Essays' | 'Others' | 'Stories' | 'Article' | 'Memoirs' | 'Story' | 'Poems' | 'Poem' | 'Travelogue' | 'Psychology' | 'Studies';
   cover: string;
   price?: number;
   originalPrice?: number;
