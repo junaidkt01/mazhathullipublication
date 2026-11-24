@@ -1,4 +1,4 @@
-export const MAZHATHULLI_WHATSAPP_NUMBER = '919961260138';
+export const MAZHATHULLI_WHATSAPP_NUMBER = '919744843249';
 
 export type WhatsAppActionType = 'book' | 'course' | 'droplet' | 'general' | 'award' | 'publishing';
 

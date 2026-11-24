@@ -273,7 +273,7 @@ export const BookOrderModal: React.FC = () => {
                         setPhone(e.target.value);
                         if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
                       }}
-                      placeholder="e.g. 9961260138"
+                      placeholder="e.g. 9744843249"
                       className={`w-full px-3.5 py-2.5 pl-9 text-sm rounded-xl border ${
                         errors.phone ? 'border-red-500 bg-red-50/20' : 'border-gray-300 focus:border-[#0098DA]'
                       } focus:outline-none focus:ring-2 focus:ring-[#0098DA]/20 transition-all`}

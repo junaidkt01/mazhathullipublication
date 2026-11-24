@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
                 <Youtube className="w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/919961260138"
+                href="https://wa.me/919744843249"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
